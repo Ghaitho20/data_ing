@@ -89,7 +89,7 @@ jobs:
       - name: Checkout Terraform Repo
         uses: actions/checkout@v4
         with:
-          repository: Ghaitho20/terraform-etl_new_ok-a95977cc
+          repository: Ghaitho20/terraform-etl_new_ok-f28e1fe6
           token: ${{ secrets.GH_TOKEN }}
 
       - name: Configure AWS Credentials
