@@ -22,7 +22,7 @@ jobs:
       - name: Checkout Terraform Repo
         uses: actions/checkout@v4
         with:
-          repository: Ghaitho20/terraform-demo_spark-089a2fd1
+          repository: Ghaitho20/terraform-demo_spark-f71bd165
           token: ${{ secrets.GH_TOKEN }}
           path: terraform
 
@@ -49,7 +49,7 @@ jobs:
         working-directory: terraform/infra
         run: |
           echo "S3_BUCKET_1=$(terraform output -raw scripts_bucket_name)" >> $GITHUB_ENV
-          echo "S3_KEY_1=$(terraform output -raw glue_test_script_arn)" >> $GITHUB_ENV
+          echo "S3_KEY_1=s3://data-pipeline-scripts-r39swaz5bkqzy717rk/scripts/glue_job.py" >> $GITHUB_ENV
           echo "GLUE_JOB_1=$(terraform output -raw glue_job_name)" >> $GITHUB_ENV
 
 
@@ -76,7 +76,7 @@ jobs:
       # ─────────────────────────────
       - name: Trigger Glue Jobs
         run: |
-          CONFIG_BUCKET="tfstate-demo-spark-xwwuj0vp"
+          CONFIG_BUCKET="tfstate-demo-spark-uosty025"
           CONFIG_PATH="s3://${CONFIG_BUCKET}/config.json"
 
           RUN1=$(aws glue start-job-run --job-name "$GLUE_JOB_1" --arguments '{"--CONFIG_PATH":"'"$CONFIG_PATH"'"}' --query "JobRunId" --output text)
